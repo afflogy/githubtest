@@ -1,14 +1,14 @@
-package umc.spring.domain;
+package umc.study.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.common.BaseEntity;
-import umc.spring.domain.enums.Gender;
-import umc.spring.domain.enums.MemberStatus;
-import umc.spring.domain.enums.SocialType;
-import umc.spring.domain.enums.mapping.MemberAgree;
-import umc.spring.domain.enums.mapping.MemberPoint;
-import umc.spring.domain.enums.mapping.MemberPrefer;
+import umc.study.domain.common.BaseEntity;
+import umc.study.domain.enums.Gender;
+import umc.study.domain.enums.MemberStatus;
+import umc.study.domain.enums.SocialType;
+import umc.study.domain.enums.mapping.MemberAgree;
+import umc.study.domain.enums.mapping.MemberPoint;
+import umc.study.domain.enums.mapping.MemberPrefer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

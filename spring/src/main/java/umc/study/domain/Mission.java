@@ -1,14 +1,13 @@
-package umc.spring.domain;
+package umc.study.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
+import umc.study.domain.common.BaseEntity;
+import umc.study.domain.enums.mapping.MemberMission;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.*;
-import umc.spring.domain.common.BaseEntity;
-import umc.spring.domain.enums.mapping.MemberMission;
 
 @Entity
 @Getter
