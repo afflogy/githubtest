@@ -1,10 +1,10 @@
-package umc.spring.domain.enums.mapping;
+package umc.study.domain.enums.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.Mission;
-import umc.spring.domain.common.BaseEntity;
-import umc.spring.domain.enums.MissionStatus;
+import umc.study.domain.Mission;
+import umc.study.domain.common.BaseEntity;
+import umc.study.domain.enums.MissionStatus;
 
 @Entity
 @Getter
