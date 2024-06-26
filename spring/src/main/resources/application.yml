@@ -16,5 +16,5 @@ spring:
         format_sql: true
         use_sql_comments: true
         hbm2ddl:
-          auto: create
+          auto: update     # 새로만드는건 create
         default_batch_fetch_size: 1000
