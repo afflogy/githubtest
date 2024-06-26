@@ -1,4 +1,4 @@
-package umc.study.domain.enums.mapping;
+package umc.study.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
