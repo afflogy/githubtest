@@ -2,6 +2,7 @@ package umc.study.converter;
 
 import umc.study.domain.Review;
 import umc.study.web.dto.RestaurantRequestDTO;
+import umc.study.web.dto.RestaurantResponseDTO;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +16,7 @@ public class RestaurantConverter {
                 .build();
     }
 
-    public static RestaurantReponseDTO.CreateReviewResultDTO toCreateReviewResultDTO(Review review){
+    public static RestaurantResponseDTO.CreateReviewResultDTO toCreateReviewResultDTO(Review review){
         return RestaurantResponseDTO.CreateReviewResultDTO.buider()
                 .reviewId(review.getId())
                 .createdAt(LocalDateTime.now())
