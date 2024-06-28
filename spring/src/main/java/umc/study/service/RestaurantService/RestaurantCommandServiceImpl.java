@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.converter.MemberPreferConverter;
+import umc.study.converter.RestaurantConverter;
 import umc.study.domain.Review;
 import umc.study.domain.mapping.MemberPrefer;
 import umc.study.repository.MemberRepository;
@@ -16,14 +17,12 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RestaurantCommandServiceImpl {
-    private final RestaurantRepository memberRepository;
+public class RestaurantCommandServiceImpl implements RestaurantCommandService {
+    private final RestaurantRepository restaurantRepository;
 
     private final ReviewRepository reviewRepository;
 
     private final MemberRepository memberRepository;
-
-    private final RestaurantRepository restaurantRepository;
 
     @Override
     @Transactional
