@@ -16,4 +16,13 @@ public class RestaurantResponseDTO {
         Long restaurantId;
         LocalDateTime createdAt; //6월 26일 오후 4시 41분 추가
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CreateReviewResultDTO {
+        Long reviewId;
+        LocalDateTime createdAt;
+    }
 }

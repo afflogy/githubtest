@@ -2,8 +2,9 @@
 ### Example user template
 
 # IntelliJ project files
+###.iml -> .yml
 .idea
-*.iml
+*.yml
 out
 gen
 .gradle

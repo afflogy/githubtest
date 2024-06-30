@@ -24,18 +24,8 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-//	// Springdoc <- sping ver3.x.x
-//	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
-//	// Spring Security
-//	implementation "org.springframework.boot:spring-boot-starter-security"
-//	implementation "org.springframework.security:spring-security-test"
-//
-//	// JWT
-//	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-//	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-//	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
-
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0' // Springdoc <- sping ver3.x.x
+//	implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -43,14 +33,17 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//	// Spring Security
+//	implementation "org.springframework.boot:spring-boot-starter-security"
+//	implementation "org.springframework.security:spring-security-test"
+//
+//	// JWT
+//	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+//	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+//	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5z
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-////  '-parameters' flag. 오류 때문에 설정
-//tasks.withType(JavaCompile) {
-//	options.compilerArgs << '-parameters'
-//}
 

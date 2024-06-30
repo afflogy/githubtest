@@ -19,6 +19,7 @@ public class SwaggerConfig {
                 .description("UMC Server WorkBook API 명세서")
                 .version("1.0.0");
 
+        //JWT를 사용하는 경우 추가
         String jwtSchemeName = "JWT TOKEN";
         // API 요청헤더에 인증정보 포함
         SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwtSchemeName);
