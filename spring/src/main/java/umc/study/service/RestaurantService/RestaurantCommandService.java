@@ -5,7 +5,11 @@ import umc.study.domain.Review;
 import umc.study.web.dto.RestaurantRequestDTO;
 
 public interface RestaurantCommandService {
-    Restaurant joinRestaurant(RestaurantRequestDTO.JoinDTO request);
+    static Restaurant joinRestaurant(RestaurantRequestDTO.JoinDTO request) {
+        return null;
+    }
 
     Review createReview(Long memberId, Long restaurantId, RestaurantRequestDTO.ReviewDTO request);
+
+    void getReviewList(Long restaurantId, Integer page);
 }

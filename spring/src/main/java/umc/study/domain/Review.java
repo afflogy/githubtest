@@ -33,7 +33,7 @@ public class Review extends BaseEntity {
 
 
     //RestaurantCommandServiceImpl에 영향을 줌
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "review", cascade = CascadeType.ALL) <----- 7월 1일에 수정
     public void setMember(Member member){
         if(this.member != null)
             member.getReviewList().remove(this);

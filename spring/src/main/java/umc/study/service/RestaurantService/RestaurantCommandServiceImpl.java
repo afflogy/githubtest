@@ -27,7 +27,7 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
 
     private final MemberRepository memberRepository;
 
-    @Override
+    //@Override
     @Transactional
     public Restaurant joinRestaurant(RestaurantRequestDTO.JoinDTO request) {
 
