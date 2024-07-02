@@ -1,3 +1,4 @@
+//어노테이션으로 검증 - 1) validpage 어노테이션 생성
 package umc.study.validation.annotation;
 
 import jakarta.validation.Payload;

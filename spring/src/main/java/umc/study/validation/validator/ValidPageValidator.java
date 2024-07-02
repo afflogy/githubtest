@@ -1,3 +1,4 @@
+//어노테이션으로 검증 - 2) ValidPageValidator validator 생성
 package umc.study.validation.validator;
 
 import jakarta.validation.ConstraintValidator;
