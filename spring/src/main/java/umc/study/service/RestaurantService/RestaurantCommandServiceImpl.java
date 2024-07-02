@@ -1,10 +1,10 @@
 package umc.study.service.RestaurantService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exception.handler.ReviewHandler;
 import umc.study.converter.RestaurantConverter;
 import umc.study.domain.Restaurant;
 import umc.study.domain.Review;
@@ -12,9 +12,7 @@ import umc.study.repository.MemberRepository;
 import umc.study.repository.RestaurantRepository;
 import umc.study.repository.ReviewRepository;
 import umc.study.web.dto.RestaurantRequestDTO;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import umc.study.web.dto.RestaurantResponseDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -30,27 +28,33 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
     //@Override
     @Transactional
     public Restaurant joinRestaurant(RestaurantRequestDTO.JoinDTO request) {
-
         Restaurant newRestaurant = RestaurantConverter.toRestaurant(request);
-        List<Review> reviewList = request.getReview().stream()
-                .map(reviewId -> reviewRepository.findById(reviewId).orElseThrow(() -> new ReviewHandler(ErrorStatus.REVIEW_NOT_FOUND))).toList();
-
-        newRestaurant.setReviews(reviewList);
-
         return restaurantRepository.save(newRestaurant);
     }
 
     @Override
     @Transactional
     public Review createReview(Long memberId, Long restaurantId, RestaurantRequestDTO.ReviewDTO request) {
-
         Review review = RestaurantConverter.toReview(request);
-
-        review.setMember(memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Member not found"))); // Custom exception recommended
-        review.setRestaurant(restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new RuntimeException("Restaurant not found"))); // Custom exception recommended
-
+        review.setMember(memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 MemberID")));
+        review.setRestaurant(restaurantRepository.findById(restaurantId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 RestaurantID")));
         return reviewRepository.save(review);
+    }
+
+    @Override
+    public RestaurantResponseDTO.ReviewPreViewListDTO getReviewList(Long restaurantId, int page) {
+        // restaurantId로 Restaurant 객체 조회
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid restaurantId: " + restaurantId));
+
+        // PageRequest 객체 생성
+        PageRequest pageRequest = PageRequest.of(page, 10);
+
+        // 조회된 Restaurant 객체로 리뷰 목록 조회
+        Page<Review> reviews = reviewRepository.findAllByRestaurant(restaurant, pageRequest);
+
+        // 리뷰 목록을 DTO로 변환 toreviewPreViewListDTO(reviews)에서 reviews를 toreviewPreViewListDTO는 원래 List로 받는데
+        // 아래 코드에서는 reviews를 Page로 받아야하는 조건이 있어서 Converter에서 toreviewPreViewListDTO파라미터를 Page로 바꿈
+        return RestaurantConverter.toreviewPreViewListDTO(reviews);
     }
 }

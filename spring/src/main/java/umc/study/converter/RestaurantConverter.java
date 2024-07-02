@@ -1,5 +1,6 @@
 package umc.study.converter;
 
+import org.springframework.data.domain.Page;
 import umc.study.domain.Restaurant;
 import umc.study.domain.Review;
 import umc.study.web.dto.RestaurantRequestDTO;
@@ -44,15 +45,18 @@ public class RestaurantConverter {
                 .build();
     }
 
-    public static RestaurantResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(List<Review> reviewList){
-        List<RestaurantResponseDTO.ReviewPreViewDTO> reviewPreViewDTOList = reviewList.stream()
+    // 10주차 실습 추가
+    // 파라미터 List<Review> reviewList -> Page<Review> reviewPage로 변경
+    // 그 이후에 반환값에서 .isLast(), .isFirst()의 오류가 사라짐
+    public static RestaurantResponseDTO.ReviewPreViewListDTO toreviewPreViewListDTO(Page<Review> reviewPage){
+        List<RestaurantResponseDTO.ReviewPreViewDTO> reviewPreViewDTOList = reviewPage.stream()
                 .map(RestaurantConverter::reviewPreViewDTO).collect(Collectors.toList());
 
         return RestaurantResponseDTO.ReviewPreViewListDTO.builder()
-                .isLast(reviewList.isLast())
-                .isFirst(reviewList.isFirst())
-                .totalPage(reviewList.getTotalPages())
-                .totalElements(reviewList.getTotalElements())
+                .isLast(reviewPage.isLast())
+                .isFirst(reviewPage.isFirst())
+                .totalPage(reviewPage.getTotalPages())
+                .totalElements(reviewPage.getTotalElements())
                 .listSize(reviewPreViewDTOList.size())
                 .reviewList(reviewPreViewDTOList)
                 .build();

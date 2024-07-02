@@ -50,7 +50,8 @@ public class RestaurantController {
     })
     public ApiResponse getReviewList(@ExistRestaurant @PathVariable(name = "restaurantId") Long restaurantId, @ValidPage @RequestParam(name = "page") Integer page){
         int zeroBasedPage = page - 1;
-        return ApiResponse.onSuccess(restaurantCommandService.getReviewList(restaurantId, zeroBasedPage));
+        RestaurantResponseDTO.ReviewPreViewListDTO reviews = restaurantCommandService.getReviewList(restaurantId, zeroBasedPage);
+        return ApiResponse.onSuccess(reviews);
     }
 
     // 자체적으로 작성하던 것
