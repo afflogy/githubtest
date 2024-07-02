@@ -19,6 +19,9 @@ public enum SuccessStatus implements BaseCode {
     // Restaurnat 관련 응답
     //RESTAURANT_OK(HttpStatus.OK, "RESTAURANT200", "가게가 존재합니다.");
 
+
+    //Review 관련 응답
+
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;

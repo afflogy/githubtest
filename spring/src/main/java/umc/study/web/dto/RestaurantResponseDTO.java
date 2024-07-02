@@ -14,7 +14,7 @@ public class RestaurantResponseDTO {
     @AllArgsConstructor
     public static class JoinResultDTO{
         Long restaurantId;
-        LocalDateTime createdAt; //6월 26일 오후 4시 41분 추가
+        LocalDateTime createdAt;
     }
 
     @Builder
