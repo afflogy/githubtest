@@ -29,6 +29,7 @@ public class RestaurantController {
 
     private final RestaurantCommandService restaurantCommandService;
 
+    //week 9 스터디 노트 : 가게 리스트, 간단한 회원가입
     @PostMapping("/")
     public ApiResponse<RestaurantResponseDTO.JoinResultDTO> join(@RequestBody @Valid RestaurantRequestDTO.JoinDTO request){
         Restaurant restaurant = RestaurantCommandService.joinRestaurant(request); //joinRestaurant RestaurantCommandService에 생성함
@@ -36,7 +37,7 @@ public class RestaurantController {
     }
 
     // week 10 스터디노트 : 가게 리뷰 Controller
-    @GetMapping("/{storeId}/reviews")
+    @GetMapping("/{restaurantId}/reviews")
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
@@ -53,6 +54,7 @@ public class RestaurantController {
         RestaurantResponseDTO.ReviewPreViewListDTO reviews = restaurantCommandService.getReviewList(restaurantId, zeroBasedPage);
         return ApiResponse.onSuccess(reviews);
     }
+
 
     // 자체적으로 작성하던 것
 //    @PostMapping("/{restaurantId}/reviews")
