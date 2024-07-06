@@ -6,9 +6,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.converter.RestaurantConverter;
+import umc.study.domain.Region;
 import umc.study.domain.Restaurant;
 import umc.study.domain.Review;
 import umc.study.repository.MemberRepository;
+import umc.study.repository.RegionRepository;
 import umc.study.repository.RestaurantRepository;
 import umc.study.repository.ReviewRepository;
 import umc.study.web.dto.RestaurantRequestDTO;
@@ -25,7 +27,9 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
 
     private final MemberRepository memberRepository;
 
-    //@Override
+    private final RegionRepository regionRepository;
+
+    @Override
     @Transactional
     public Restaurant joinRestaurant(RestaurantRequestDTO.JoinDTO request) {
         Restaurant newRestaurant = RestaurantConverter.toRestaurant(request);
@@ -57,4 +61,16 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
         // 아래 코드에서는 reviews를 Page로 받아야하는 조건이 있어서 Converter에서 toreviewPreViewListDTO파라미터를 Page로 바꿈
         return RestaurantConverter.toreviewPreViewListDTO(reviews);
     }
+
+    @Override
+    public Restaurant addRestaurantToArea(RestaurantRequestDTO.AddRestaurantDTO request) {
+        Region region = regionRepository.findById(request.getRegionId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid areaId: " + request.getRegionId()));
+
+        Restaurant restaurant = RestaurantConverter.toRestaurant(request);
+        restaurant.setRegion(region);
+
+        return restaurantRepository.save(restaurant);
+    }
+
 }

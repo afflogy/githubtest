@@ -36,6 +36,19 @@ public class RestaurantController {
         return ApiResponse.onSuccess(RestaurantConverter.toJoinResultDTO(restaurant));
     }
 
+    //week 9 스터디 노트 : 특정 지역에 가게 추가
+    @PostMapping("/add")
+    @Operation(summary = "특정 지역에 가게 추가 API", description = "특정 지역에 가게를 추가하는 API입니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "가게 추가 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 에러", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+    })
+    public ApiResponse<RestaurantResponseDTO> addRestaurantToArea(@RequestBody @Valid RestaurantRequestDTO.AddRestaurantDTO request) {
+        Restaurant restaurant = restaurantCommandService.addRestaurantToRegion(request);
+        return ApiResponse.onSuccess(RestaurantConverter.toRestaurantResponseDTO(restaurant)); // <-- toRestaurant가 맞는건가?
+    }
+
     // week 10 스터디노트 : 가게 리뷰 Controller
     @GetMapping("/{restaurantId}/reviews")
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")

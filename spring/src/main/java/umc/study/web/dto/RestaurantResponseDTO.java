@@ -15,8 +15,8 @@ public class RestaurantResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class JoinResultDTO{
-        Long restaurantId;
-        LocalDateTime createdAt;
+        private Long restaurantId;
+        private LocalDateTime createdAt;
     }
 
     @Builder
@@ -24,8 +24,8 @@ public class RestaurantResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateReviewResultDTO {
-        Long reviewId;
-        LocalDateTime createdAt;
+        private Long reviewId;
+        private LocalDateTime createdAt;
     }
 
     @Builder
@@ -33,12 +33,12 @@ public class RestaurantResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ReviewPreViewListDTO{
-        List<ReviewPreViewDTO> reviewList;
-        Integer listSize;
-        Integer totalPage;
-        Long totalElements;
-        Boolean isFirst;
-        Boolean isLast;
+        private List<ReviewPreViewDTO> reviewList;
+        private Integer listSize;
+        private Integer totalPage;
+        private Long totalElements;
+        private Boolean isFirst;
+        private Boolean isLast;
     }
 
     @Builder
@@ -46,9 +46,21 @@ public class RestaurantResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ReviewPreViewDTO{
-        String ownerNickname;
-        Float score;
-        String body;
-        LocalDate createdAt;
+        private String ownerNickname;
+        private Float score;
+        private String body;
+        private LocalDate createdAt;
     }
+
+//    @Getter
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    @Builder
+//    public static class RestaurantResponseDTO {
+//        private Long id;
+//        private String name;
+//        private String address;
+//        private String phoneNumber;
+//        private List<ReviewPreViewDTO> reviews;
+//    }
 }
