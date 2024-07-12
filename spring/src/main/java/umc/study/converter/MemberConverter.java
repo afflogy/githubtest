@@ -19,7 +19,9 @@ public class MemberConverter {
     }
 
     public static Member toMember(MemberRequestDTO.JoinDTO request){
+
         Gender gender = null;
+
         switch (request.getGender()){
             case 1:
                 gender = Gender.MALE;
@@ -36,7 +38,16 @@ public class MemberConverter {
                 .gender(gender)
                 .name(request.getName())
                 .phone_num(request.getPhon_number())
+                .missionList(new ArrayList<>())
                 .memberPreferList(new ArrayList<>()) // **리스트는 <>()로 초기화해야함
                 .build();
     }
 }
+
+// 향상된 switch문
+//Gender gender = switch (request.getGender()) {
+//    case 1 -> Gender.MALE;
+//    case 2 -> Gender.FEMALE;
+//    case 3 -> Gender.NONE;
+//    default -> null;
+//};

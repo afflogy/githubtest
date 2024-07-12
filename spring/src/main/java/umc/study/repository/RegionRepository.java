@@ -1,6 +1,9 @@
 package umc.study.repository;
 
-public class RegionRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import umc.study.domain.Region;
+
+public class RegionRepository extends JpaRepository<Region, Integer> {
     public boolean existsById(Long value) {
         return false;
     }

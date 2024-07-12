@@ -19,6 +19,8 @@ public class MemberRequestDTO {
         @Size(min=5, max=12)
         String address;
         @ExistCategories
+        List<Long> mission;
+        @ExistCategories
         List<Long> preferCategory;
     }
 }
