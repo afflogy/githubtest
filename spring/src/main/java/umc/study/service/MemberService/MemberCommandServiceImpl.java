@@ -17,8 +17,10 @@ import umc.study.domain.mapping.MemberPrefer;
 import umc.study.repository.FoodCategoryRepository;
 import umc.study.repository.MemberRepository;
 import umc.study.repository.MissionRepository;
+import umc.study.repository.ReviewRepository;
 import umc.study.web.dto.MemberRequestDTO;
 
+import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,7 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     private final MemberRepository memberRepository; //엔티티와 상호작용하는 레포지토리
     private final FoodCategoryRepository foodCategoryRepository;
     private final MissionRepository missionRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     @Transactional

@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.exception.handler.MemberHandler;
 import umc.study.domain.Member;
 import umc.study.domain.Review;
 import umc.study.repository.MemberRepository;

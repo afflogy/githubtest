@@ -2,13 +2,12 @@ package umc.study.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import umc.study.domain.Region;
+import umc.study.domain.Restaurant;
 
-public class RegionRepository extends JpaRepository<Region, Integer> {
-    public boolean existsById(Long value) {
-        return false;
-    }
+import java.util.Optional;
 
-    public <T> ScopedValue<T> findById(Long regionId) {
-        return null;
-    }
+public interface RegionRepository extends JpaRepository<Region, Integer> {
+    Optional<Restaurant> existsById(Long value);
+
+    Optional<Restaurant> findById(Long regionId);
 }

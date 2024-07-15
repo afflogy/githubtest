@@ -1,12 +1,16 @@
 package umc.study.converter;
 
+import org.springframework.data.domain.Page;
 import umc.study.domain.Member;
+import umc.study.domain.Review;
 import umc.study.domain.enums.Gender;
 import umc.study.web.dto.MemberRequestDTO;
 import umc.study.web.dto.MemberResponseDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemberConverter {
 
@@ -40,6 +44,30 @@ public class MemberConverter {
                 .phone_num(request.getPhon_number())
                 .missionList(new ArrayList<>())
                 .memberPreferList(new ArrayList<>()) // **리스트는 <>()로 초기화해야함
+                .build();
+    }
+
+    public static MemberResponseDTO.MyReviewPreviewDTO myReviewPreviewDTO(Review review) {
+        return MemberResponseDTO.MyReviewPreviewDTO.builder()
+                .ownerNickname(review.getMember().getName())
+                .score(review.getScore())
+                .createdAt(review.getCreatedAt().toLocalDate())
+                .body(review.getBody())
+                .build();
+    }
+
+    public static MemberResponseDTO.ReviewPreviewListDTO ReviewPreviewListDTO(Page<Review> reviewList) {
+
+        List<MemberResponseDTO.MyReviewPreviewDTO> reviewPreviewListDTO = reviewList.stream()
+                .map(MemberConverter::myReviewPreviewDTO).collect(Collectors.toList());
+
+        return MemberResponseDTO.ReviewPreviewListDTO.builder()
+                .isLast(reviewList.isLast())
+                .isFirst(reviewList.isFirst())
+                .totalPage(reviewList.getTotalPages())
+                .totalElements(reviewList.getTotalElements())
+                .listSize(reviewPreviewListDTO.size())
+                .reviewList(reviewPreviewListDTO)
                 .build();
     }
 }
