@@ -31,16 +31,15 @@ public enum ErrorStatus implements BaseErrorCode {
     FOOD_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "FOOD_CATEGORY4001", "음식 카테고리가 없습니다."),
 
     // Restaurant Error
-    RESTAURANT_NOT_FOUND(HttpStatus.NOT_FOUND, "RESTAURANT4001","가게가 없습니다.");
+    RESTAURANT_NOT_FOUND(HttpStatus.NOT_FOUND, "RESTAURANT4001","가게가 없습니다."),
 
-    // Region Error
-    REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "REGION4001", "해당하는 지역이 존재하지 않습니다.");
+    PAGE_NOT_VALID(HttpStatus.BAD_REQUEST, "PAGE4001", "해당하는 페이지 번호가 존재하지 않습니다."),
 
-    // Page Error
-    PAGE_NOT_VALID(HttpStatus.BAD_REQUEST, "PAGE4001","해당하는 페이지 번호가 존재하지 않습니다.");
+    REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "REGION4001", "해당하는 지역이 존재하지 않습니다."),
 
-    //Review Error
-    REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "REVIEW4001", "리뷰가 없습니다.");
+    REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "REVIEW4001", "리뷰가 없습니다."),
+
+    MEMBER_MISSION_ALREADY_EXISTS(HttpStatus.NOT_FOUND, "MISSION_4001", "해당하는 미션이 존재하지 않습니다.");
 
 
     private final HttpStatus httpStatus;
