@@ -23,8 +23,8 @@ public class MemberResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ReviewPreviewListDTO{
-        List<MemberResponseDTO.ReviewPreviewListDTO> reviewList;
+    public static class MyReviewPreViewListDTO{
+        List<MemberResponseDTO.MyReviewPreViewListDTO> reviewList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
@@ -36,7 +36,7 @@ public class MemberResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MyReviewPreviewDTO{
+    public static class MyReviewPreViewDTO{
         String ownerNickname;
         Float score;
         String body;

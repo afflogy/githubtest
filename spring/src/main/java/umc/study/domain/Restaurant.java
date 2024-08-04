@@ -17,16 +17,10 @@ public class Restaurant extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
     private String name;
 
-    @Column(nullable = false, length = 20)
-    private String phone_num;
-
-    @Column(nullable = false, length = 40)
     private String address;
 
-    @Column(nullable = true, length = 40)
     private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +30,8 @@ public class Restaurant extends BaseEntity {
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<Mission> missionList = new ArrayList<>();
+    // 왜 필요없지..?
+//    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+//    private List<Mission> missionList = new ArrayList<>();
 
 }

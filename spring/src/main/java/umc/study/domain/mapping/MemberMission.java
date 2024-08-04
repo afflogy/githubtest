@@ -2,6 +2,8 @@ package umc.study.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import umc.study.domain.FoodCategory;
 import umc.study.domain.Member;
 import umc.study.domain.Mission;
 import umc.study.domain.common.BaseEntity;
@@ -19,16 +21,30 @@ public class MemberMission extends BaseEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
+    @ColumnDefault("CHALLENGING")
     private MissionStatus state;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    //임시추가
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private FoodCategory foodCategory;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public void setMember(Member member){
+        this.member = member;
+        if (!member.getMemberMissionList().contains(this)) {
+            member.getMemberMissionList().add(this);
+        }
+    }
+
+    public void setMemberMission(Mission mission){
+        this.mission = mission;
+    }
 
 }

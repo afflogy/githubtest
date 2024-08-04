@@ -19,10 +19,16 @@ public class Mission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String condition;
+    @Getter
+    private String ownerRestaurant;
+
+    private Integer reward;
+
+    private String missionSpec;
 
     private LocalDate deadline;
+
+    private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")

@@ -31,9 +31,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-
     //RestaurantCommandServiceImpl에 영향을 줌
-    //@OneToMany(mappedBy = "review", cascade = CascadeType.ALL) <----- 7월 1일에 수정
     public void setMember(Member member){
         if(this.member != null)
             member.getReviewList().remove(this);

@@ -6,10 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exception.handler.MemberHandler;
+import umc.study.apiPayload.exception.handler.MemberMissionHandler;
 import umc.study.domain.Member;
 import umc.study.domain.Review;
-import umc.study.repository.MemberRepository;
+import umc.study.repository.MemberMissionRepository;
 import umc.study.repository.ReviewRepository;
 
 import java.util.Optional;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Transactional
 public class MemberQueryServiceImpl implements MemberQueryService {
 
-    private final MemberRepository memberRepository;
+    private final MemberMissionRepository memberRepository;
     private final ReviewRepository reviewRepository;
 
     @Override
@@ -36,5 +36,4 @@ public class MemberQueryServiceImpl implements MemberQueryService {
 
         return MemberPage;
     }
-
-    //멤버 쿼리 서비스 변경 커밋!
+}

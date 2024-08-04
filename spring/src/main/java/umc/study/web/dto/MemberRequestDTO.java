@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import umc.study.validation.annotation.ExistCategories;
+import umc.study.validation.annotation.UniqueMemberMission;
 
 import java.util.List;
 
@@ -18,8 +19,10 @@ public class MemberRequestDTO {
         Integer gender;
         @Size(min=5, max=12)
         String address;
-        @ExistCategories
-        List<Long> mission;
+        @Size(min = 5, max = 12)
+        String specAddress;
+        @UniqueMemberMission
+        List<Long> memberMission;
         @ExistCategories
         List<Long> preferCategory;
     }

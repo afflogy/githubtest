@@ -10,6 +10,7 @@ import umc.study.domain.enums.Gender;
 import umc.study.domain.enums.MemberStatus;
 import umc.study.domain.enums.SocialType;
 import umc.study.domain.mapping.MemberAgree;
+import umc.study.domain.mapping.MemberMission;
 import umc.study.domain.mapping.MemberPoint;
 import umc.study.domain.mapping.MemberPrefer;
 
@@ -39,6 +40,9 @@ public class Member extends BaseEntity {
    @Column(nullable = false, length = 40)
    private String address;
 
+   @Column(nullable = false, length = 40)
+   private String specAddress;
+
    @Enumerated(EnumType.STRING)
    @Column(columnDefinition = "VARCHAR(10)")
    private Gender gender;
@@ -52,6 +56,8 @@ public class Member extends BaseEntity {
 
    private LocalDate inactiveDate;
 
+   private String email;
+
    @ColumnDefault("0")
    private Integer point;
 
@@ -59,8 +65,7 @@ public class Member extends BaseEntity {
    private List<MemberAgree> memberAgreeList = new ArrayList<>();
 
    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-   private List<Mission> missionList = new ArrayList<>();
-
+   private List<MemberMission> memberMissionList = new ArrayList<>();
    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
    private List<MemberPrefer> memberPreferList = new ArrayList<>();
 

@@ -6,8 +6,6 @@ import umc.study.domain.Restaurant;
 
 import java.util.Optional;
 
-public interface RegionRepository extends JpaRepository<Region, Integer> {
-    Optional<Restaurant> existsById(Long value);
-
-    Optional<Restaurant> findById(Long regionId);
+public interface RegionRepository extends JpaRepository<Region, Long> {
+    Optional<Region> findByName(String name);
 }

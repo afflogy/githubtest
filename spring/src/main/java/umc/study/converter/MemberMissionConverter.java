@@ -6,7 +6,7 @@ import umc.study.domain.mapping.MemberMission;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MissionConverter {
+public class MemberMissionConverter {
 
     public static List<MemberMission> toMemberMissionList(List<Mission> memberMissionList){
 
@@ -15,6 +15,6 @@ public class MissionConverter {
                         MemberMission.builder()
                                 .mission(mission)
                                 .build()
-                ).collect(Collectors.toList()).reversed();
+                ).collect(Collectors.toList());
     }
 }

@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class MemberConverter {
 
+
+    // 1. 사용자 가입
     public static MemberResponseDTO.JoinResultDTO toJoinResultDTO(Member member){
         return MemberResponseDTO.JoinResultDTO.builder()
                 .memberId(member.getId())
@@ -22,6 +24,7 @@ public class MemberConverter {
         // dto에 있는 파일의 속성을 가져옴
     }
 
+    // 1에 대해서 MemberRequestDTO에 보냄
     public static Member toMember(MemberRequestDTO.JoinDTO request){
 
         Gender gender = null;
@@ -47,8 +50,9 @@ public class MemberConverter {
                 .build();
     }
 
-    public static MemberResponseDTO.MyReviewPreviewDTO myReviewPreviewDTO(Review review) {
-        return MemberResponseDTO.MyReviewPreviewDTO.builder()
+    // 2. 사용자의 리뷰 미리보기
+    public static MemberResponseDTO.MyReviewPreViewDTO myReviewPreViewDTO(Review review) {
+        return MemberResponseDTO.MyReviewPreViewDTO.builder()
                 .ownerNickname(review.getMember().getName())
                 .score(review.getScore())
                 .createdAt(review.getCreatedAt().toLocalDate())
@@ -56,26 +60,19 @@ public class MemberConverter {
                 .build();
     }
 
-    public static MemberResponseDTO.ReviewPreviewListDTO ReviewPreviewListDTO(Page<Review> reviewList) {
+    // 2에 대한 미리보기 Res
+    public static MemberResponseDTO.MyReviewPreViewListDTO myReviewPreViewListDTO(Page<Review> reviewList) {
 
-        List<MemberResponseDTO.MyReviewPreviewDTO> reviewPreviewListDTO = reviewList.stream()
-                .map(MemberConverter::myReviewPreviewDTO).collect(Collectors.toList());
+        List<MemberResponseDTO.MyReviewPreViewDTO> myReviewPreViewDTOList = reviewList.stream()
+                .map(MemberConverter::myReviewPreViewDTO).collect(Collectors.toList());
 
-        return MemberResponseDTO.ReviewPreviewListDTO.builder()
+        return MemberResponseDTO.MyReviewPreViewListDTO.builder()
                 .isLast(reviewList.isLast())
                 .isFirst(reviewList.isFirst())
                 .totalPage(reviewList.getTotalPages())
                 .totalElements(reviewList.getTotalElements())
-                .listSize(reviewPreviewListDTO.size())
-                .reviewList(reviewPreviewListDTO)
+                .listSize(myReviewPreViewDTOList.size())
+                .reviewList(myReviewPreViewDTOList)
                 .build();
     }
 }
-
-// 향상된 switch문
-//Gender gender = switch (request.getGender()) {
-//    case 1 -> Gender.MALE;
-//    case 2 -> Gender.FEMALE;
-//    case 3 -> Gender.NONE;
-//    default -> null;
-//};

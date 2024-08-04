@@ -17,8 +17,7 @@ public class Region extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String region_state;
+    private String name;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Restaurant> restaurantList = new ArrayList<>();

@@ -5,22 +5,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.handler.FoodCategoryHandler;
-import umc.study.apiPayload.exception.handler.MissionHandler;
+import umc.study.apiPayload.exception.handler.MemberMissionHandler;
 import umc.study.converter.MemberConverter;
 import umc.study.converter.MemberPreferConverter;
-import umc.study.converter.MissionConverter;
+import umc.study.converter.MemberMissionConverter;
 import umc.study.domain.FoodCategory;
 import umc.study.domain.Member;
 import umc.study.domain.Mission;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.domain.mapping.MemberPrefer;
 import umc.study.repository.FoodCategoryRepository;
-import umc.study.repository.MemberRepository;
+import umc.study.repository.MemberMissionRepository;
 import umc.study.repository.MissionRepository;
 import umc.study.repository.ReviewRepository;
 import umc.study.web.dto.MemberRequestDTO;
 
-import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +28,9 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class MemberCommandServiceImpl implements MemberCommandService{
 
-    private final MemberRepository memberRepository; //엔티티와 상호작용하는 레포지토리
+    private final MemberMissionRepository memberRepository; //엔티티와 상호작용하는 레포지토리
     private final FoodCategoryRepository foodCategoryRepository;
     private final MissionRepository missionRepository;
-    private final ReviewRepository reviewRepository;
 
     @Override
     @Transactional
@@ -49,24 +47,19 @@ public class MemberCommandServiceImpl implements MemberCommandService{
 
         // 3. FoodCategory 엔티티 리스트를 MemberPrefer 리스트로 변환
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
-        //memberPreferList.forEach(memberPrefer -> memberPrefer.setMember(newMember));
-        for (MemberPrefer memberPrefer : memberPreferList) {
-            memberPrefer.setMember(newMember);
-        }
+        memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
+
 
         // 4. member가 선택한 미션을 DB에서 조회
-        List<Mission> missionList = request.getMission().stream()
+        List<Mission> missionList = request.getMemberMission().stream()
                 .map(missionId -> missionRepository.findById(missionId)
-                        .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)))
+                        .orElseThrow(() ->  new MemberMissionHandler(ErrorStatus.MISSION_NOT_FOUND)))
                 .collect(Collectors.toList());
 
         // 5. Mission 엔티티 리스트를 MemberMission 리스트로 변환
-        List<MemberMission> memberMissionList = MissionConverter.toMemberMissionList(missionList);
-        for (MemberMission memberMission : memberMissionList) {
-            memberMission.setMember(newMember);
-        }
+        List<MemberMission> memberMissionList = MemberMissionConverter.toMemberMissionList(missionList);
+        memberMissionList.forEach(memberMission -> memberMission.setMember(newMember));
 
-        //
         return memberRepository.save(newMember);
     }
 }
